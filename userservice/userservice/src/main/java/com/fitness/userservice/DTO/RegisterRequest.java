@@ -1,16 +1,13 @@
 package com.fitness.userservice.DTO;
 
-import com.fitness.userservice.model.UserRole;
+import com.fitness.userservice.model.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Value;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
- * DTO for {@link com.fitness.userservice.model.User}
+ * DTO for {@link User}
  */
 @Data
 public class RegisterRequest {
