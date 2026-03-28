@@ -1,4 +1,12 @@
 spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+
+
+
   application:
     name: activities-service
 
@@ -15,6 +23,12 @@ eureka:
 
 server:
   port: 8082
+
+kafka:
+  topic:
+    name: activity-events
+
+
 
 
 

@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: AI-Service
+
+
+
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/aiservice
+      database: aiservice
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8083
+
+
+
