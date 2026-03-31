@@ -1,4 +1,7 @@
 HELP.md
+DOCUMENTATION.md
+SETUP.md
+TROUBLESHOOTING.md
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -31,3 +34,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Logs ###
+logs/
+*.log
+
+### Environment ###
+.env
+.env.local
+
