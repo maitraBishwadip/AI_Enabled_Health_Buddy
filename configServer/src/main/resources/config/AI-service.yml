@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: AI-service
+
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: activity-processor-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.use.type.headers: false
+        spring.json.value.default.type: com.Fitness.AI.Service.model.Activity
+        spring.json.trusted.packages: "*"
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/aiservice
+      database: aiservice
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8083
+  servlet:
+    context-path: /
+
+kafka:
+  topic:
+    name: activity-events
+
+logging:
+  level:
+    root: INFO
+    com.Fitness.AI.Service: DEBUG
+    org.springframework.kafka: INFO
