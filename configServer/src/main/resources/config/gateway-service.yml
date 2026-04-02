@@ -2,6 +2,29 @@ spring:
   application:
     name: gateway-service
 
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+           - id: userservice
+             uri: lb://USERSERVICE
+             predicates:
+              - Path=/api/users/**
+
+           - id: activities-service
+             uri: lb://ACTIVITIES-SERVICE
+             predicates:
+               - Path=/activities/**
+
+           - id: AI-service
+             uri: lb://AI-SERVICE
+             predicates:
+               - Path=/api/recommendations/**
+
+
+
+
 
 
 
@@ -9,6 +32,12 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
+
+
+
+
+
+
 
 
 
