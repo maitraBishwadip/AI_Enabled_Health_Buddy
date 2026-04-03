@@ -12,6 +12,7 @@ import lombok.Data;
 @Data
 public class RegisterRequest {
 
+    String keycloakId;
     @NotBlank
     String email;
     @NotNull

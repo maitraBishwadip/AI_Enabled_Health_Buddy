@@ -15,7 +15,8 @@ public class UserResponse  {
 
 
     @NotBlank
-    Long id;
+    String id;
+    String keycloakId;
 
     String email;
     String password;

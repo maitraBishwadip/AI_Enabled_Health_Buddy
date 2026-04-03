@@ -2,44 +2,58 @@ spring:
   application:
     name: gateway-service
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8181/realms/fitness-app/protocol/openid-connect/certs
+
   cloud:
     gateway:
-      server:
-        webflux:
-          routes:
-           - id: userservice
-             uri: lb://USERSERVICE
-             predicates:
-              - Path=/api/users/**
+      routes:
 
-           - id: activities-service
-             uri: lb://ACTIVITIES-SERVICE
-             predicates:
-               - Path=/activities/**
+        # ================= USERS SERVICE =================
+        - id: userservice
+          uri: lb://USERSERVICE
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - StripPrefix=1
 
-           - id: AI-service
-             uri: lb://AI-SERVICE
-             predicates:
-               - Path=/api/recommendations/**
+        # ================= ACTIVITIES SERVICE =================
+        - id: activities-service
+          uri: lb://ACTIVITIES-SERVICE
+          predicates:
+            - Path=/api/activities/**
+          filters:
+            - StripPrefix=1
 
+        # ================= AI SERVICE =================
+        - id: ai-service
+          uri: lb://AI-SERVICE
+          predicates:
+            - Path=/api/recommendations/**
+          filters:
+            - StripPrefix=1
 
-
-
-
-
+      # Enable automatic discovery as fallback
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
-
-
-
-
-
-
-
-
+    fetch-registry: true
+    register-with-eureka: true
 
 server:
   port: 8086
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.gateway.route: DEBUG
+    org.springframework.cloud.gateway.handler.RoutePredicateHandlerMapping: DEBUG
